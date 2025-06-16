@@ -1,0 +1,214 @@
+import math
+from tkinter import *
+
+window=Tk()
+window.geometry("500x300")
+window.config(bg="light blue")
+window.title("Python Calculator Tkinter")
+window.bind('<Return>', lambda event: equal())
+window.bind('<BackSpace>', lambda event: backspace())
+
+#entry box
+e=Entry(window,width=30,borderwidth=10,font=("Arial", 14))
+e.place(x=10,y=2)
+
+#buttons
+
+def click(n):
+    result=e.get()
+    e.delete(0,END)
+    e.insert(0,str(result)+str(n))
+
+
+b1=Button(text="1",width=5,height=2,borderwidth=5,command= lambda:click(1))
+b1.place(x=10,y=50)
+
+b2=Button(text="2",width=5,height=2,borderwidth=5,command= lambda:click(2))
+b2.place(x=70,y=50)
+
+b3=Button(text="3",width=5,height=2,borderwidth=5,command= lambda:click(3))
+b3.place(x=130,y=50)
+
+b4=Button(text="4",width=5,height=2,borderwidth=5,command= lambda:click(4))
+b4.place(x=10,y=110)
+
+b5=Button(text="5",width=5,height=2,borderwidth=5,command= lambda:click(5))
+b5.place(x=70,y=110)
+
+b6=Button(text="6",width=5,height=2,borderwidth=5,command= lambda:click(6))
+b6.place(x=130,y=110)
+
+b7=Button(text="7",width=5,height=2,borderwidth=5,command= lambda:click(7))
+b7.place(x=10,y=170)
+
+b8=Button(text="8",width=5,height=2,borderwidth=5,command= lambda:click(8))
+b8.place(x=70,y=170)
+
+b9=Button(text="9",width=5,height=2,borderwidth=5,command= lambda:click(9))
+b9.place(x=130,y=170)
+
+b0=Button(text="0",width=5,height=2,borderwidth=5,command= lambda:click(0))
+b0.place(x=70,y=230)
+
+bpoint=Button(text=".",width=5,height=2,borderwidth=5,command= lambda:click("."))
+bpoint.place(x=10,y=230)
+
+#operator buttons
+
+def add():
+    n1=e.get()
+    global N,math
+    N=float(n1)
+    e.delete(0,END)
+    math="+"
+
+bplus=Button(text="+",width=5,height=2,borderwidth=5,command=add)
+bplus.place(x=220,y=50)
+
+def sub():
+    n1=e.get()
+    global N,math
+    N=float(n1)
+    e.delete(0,END)
+    math="-"
+
+bminus=Button(text="-",width=5,height=2,borderwidth=5,command=sub)
+bminus.place(x=220,y=110)
+
+def mult():
+    n1=e.get()
+    global N,math
+    N=float(n1)
+    e.delete(0,END)
+    math="*"
+
+bmult=Button(text="x",width=5,height=2,borderwidth=5,command=mult)
+bmult.place(x=220,y=170)
+
+def div():
+    n1=e.get()
+    global N,math
+    N=float(n1)
+    e.delete(0,END)
+    math="/"
+
+bdiv=Button(text="/",width=5,height=2,borderwidth=5,command=div)
+bdiv.place(x=220,y=230)
+
+def pow():
+    n1 = e.get()
+    global N, math
+    N = float(n1)
+    e.delete(0, END)
+    math = "^"
+
+bpow=Button(text="^",width=5,height=2,borderwidth=5,command=pow)
+bpow.place(x=280,y=110)
+
+def equal():
+    try:
+        n2=e.get()
+        e.delete(0,END)
+        if math=="+":
+         e.insert(0,N+float(n2))
+        elif math=="-":
+            e.insert(0,N-float(n2))
+        elif math=="*":
+            e.insert(0,N*float(n2))
+        elif math=="/":
+            if float(n2)==0:
+                e.insert(0,"error:division by 0")
+            else:
+                e.insert(0,N/float(n2))
+        elif math=="^":
+            e.insert(0,N**float(n2))
+    except:
+        e.insert(0,"error")
+
+beq=Button(text="=",width=5,height=2,borderwidth=5,command=equal)
+beq.place(x=130,y=230)
+
+def clr():
+    e.delete(0,END)
+
+bclr=Button(text="C",width=5,height=2,borderwidth=5,command=clr)
+bclr.place(x=280,y=50)
+
+def backspace():
+    current=e.get()
+    e.delete(0,END)
+    e.insert(0,current[:-1])
+
+bdel = Button(text="DEL", width=5, height=2, borderwidth=5, command=backspace)
+bdel.place(x=280, y=170)
+
+def sin():
+    try:
+        value=float(e.get())
+        result=math.sin(math.radians(value))
+        e.delete(0,END)
+        e.insert(0,result)
+    except:
+        e.delete(0,END)
+        e.insert(0,"Error")
+
+bsin=Button(text="sin",width=5,height=2,borderwidth=5,command=sin)
+bsin.place(x=350,y=50)
+
+def cos():
+    try:
+        value=float(e.get())
+        result=math.cos(math.radians(value))
+        e.delete(0,END)
+        e.insert(0,result)
+    except:
+        e.delete(0,END)
+        e.insert(0,"Error")
+
+bcos=Button(text="cos",width=5,height=2,borderwidth=5,command=cos)
+bcos.place(x=410,y=50)
+
+def tan():
+    try:
+        value=float(e.get())
+        result=math.tan(math.radians(value))
+        e.delete(0,END)
+        e.insert(0,result)
+    except:
+        e.delete(0,END)
+        e.insert(0,"Error")
+
+btan=Button(text="tan",width=5,height=2,borderwidth=5,command=tan)
+btan.place(x=350,y=110)
+
+def log():
+    try:
+        value=float(e.get())
+        if value<=0:
+            raise ValueError("Math domain error")
+        result=math.log10(value)
+        e.delete(0,END)
+        e.insert(0,result)
+    except:
+        e.delete(0,END)
+        e.insert(0,"Error")
+
+blog=Button(text="log",width=5,height=2,borderwidth=5,command=log)
+blog.place(x=410,y=110)
+
+def ln():
+    try:
+        value=float(e.get())
+        if value<=0:
+            raise ValueError("Math domain error")
+        result=math.log(value)
+        e.delete(0,END)
+        e.insert(0,result)
+    except:
+        e.delete(0,END)
+        e.insert(0,"Error")
+
+bln=Button(text="ln",width=5,height=2,borderwidth=5,command=ln)
+bln.place(x=350,y=170)
+
+mainloop()
